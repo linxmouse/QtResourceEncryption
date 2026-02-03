@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC>
+  <qresource prefix="/encrypted">
+    <file>main.qml.enc</file>
+    <file>MyComponent.qml.enc</file>
+    <file>test_image.png.enc</file>
+  </qresource>
+</RCC>
