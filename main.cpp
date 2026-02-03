@@ -71,13 +71,13 @@ void loadEncryptedResources(EncryptedQmlFileSelector *selector, const QString &k
     }
 
     // 新增：测试图片资源 (从本地文件读取加密后的产物)
-    QFile imgFile(":/encrypted/test_image.png.enc");
+    QFile imgFile(":/encrypted/CMake-Logo.png.enc");
     if (imgFile.open(QIODevice::ReadOnly))
     {
         QByteArray encryptedData = imgFile.readAll();
-        selector->registerEncryptedResource("test_pattern.png", encryptedData);
+        selector->registerEncryptedResource("CMake-Logo.png", encryptedData);
         imgFile.close();
-        qDebug() << "已注册加密资源: test_pattern.png";
+        qDebug() << "已注册加密资源: CMake-Logo.png";
     }
 }
 

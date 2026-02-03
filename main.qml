@@ -58,9 +58,9 @@ Window {
                     }
 
                     Image {
-                        source: "encrypted:///test_pattern.png"
-                        width: 100
-                        height: 100
+                        source: "encrypted:///CMake-Logo.png"
+                        width: 290
+                        height: 82
                         fillMode: Image.PreserveAspectFit
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
