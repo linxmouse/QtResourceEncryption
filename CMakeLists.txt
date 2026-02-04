@@ -16,8 +16,8 @@ add_executable(EncryptedQmlApp
     main.cpp
     ResourceEncryption.h
     ResourceEncryption.cpp
-    EncryptedQmlFileSelector.h
-    EncryptedQmlFileSelector.cpp
+    EncryptedResourceSelector.h
+    EncryptedResourceSelector.cpp
     EncryptedNetworkAccessManager.h
     EncryptedNetworkAccessManager.cpp
     ResourceEncryptor.h

@@ -1,10 +1,10 @@
 #include "EncryptedNetworkAccessManager.h"
-#include "EncryptedQmlFileSelector.h"
+#include "EncryptedResourceSelector.h"
 #include <QDebug>
 
-EncryptedNetworkAccessManager::EncryptedNetworkAccessManager(EncryptedQmlFileSelector *selector, QObject *parent)
+EncryptedNetworkAccessManager::EncryptedNetworkAccessManager(EncryptedResourceSelector *selector, QObject *parent)
     : QNetworkAccessManager(parent)
-    , m_selector(selector)
+    , m_resourceSelector(selector)
 {
 }
 
@@ -19,7 +19,7 @@ QNetworkReply *EncryptedNetworkAccessManager::createRequest(Operation op, const 
     // 核心请求逻辑
     qDebug() << "[Network] 尝试加载加密资源:" << resourcePath;
     // 尝试获取解密后的数据
-    QByteArray data = m_selector->getDecryptedResource(resourcePath);
+    QByteArray data = m_resourceSelector->getDecryptedResource(resourcePath);
     // 处理特殊情况：如果没找到对应数据，且是 qmldir 这种元数据请求，返回空内容以防止引擎报错
     if (data.isEmpty() && resourcePath.endsWith("qmldir")) {
         qDebug() << "[Network] 为 qmldir 提供空响应兜底";

@@ -14,7 +14,7 @@
 
 ```text
 ├── ResourceEncryption.h/cpp          # 加密/解密算法实现 (核心)
-├── EncryptedQmlFileSelector.h/cpp    # 资源注册中心，管理解密后的内存数据
+├── EncryptedResourceSelector.h/cpp    # 资源注册中心，管理解密后的内存数据
 ├── EncryptedNetworkAccessManager.h/cpp # 自定义 NetworkAccessManager 及 Reply 实现
 ├── ResourceEncryptor.h/cpp           # 批量处理文件/目录的工具类
 ├── encryptor_tool.cpp                # 命令行加密工具入口
@@ -49,7 +49,7 @@ resource_encryptor.exe -m encrypt -d -i ./qml_src -o ./encrypted -k "YourKey123"
 
 ```cpp
 // 1. 创建资源选择器
-auto selector = new EncryptedQmlFileSelector(&engine, "YourKey123");
+auto selector = new EncryptedResourceSelector(&engine, "YourKey123");
 
 // 2. 注册加密后的资源 (数据可以来自 qrc 里的 .enc 文件)
 QFile file(":/encrypted/main.qml.enc");

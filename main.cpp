@@ -7,7 +7,7 @@
 #include <QDateTime>
 
 #include "ResourceEncryption.h"
-#include "EncryptedQmlFileSelector.h"
+#include "EncryptedResourceSelector.h"
 #include "EncryptedNetworkAccessManager.h"
 
 // 日志文件
@@ -45,9 +45,9 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 }
 
 /**
- * @brief 加载并注册加密的QML文件
+ * @brief 加载并注册加密的资源文件
  */
-void loadEncryptedResources(EncryptedQmlFileSelector *selector, const QString &key)
+void loadEncryptedResources(EncryptedResourceSelector *selector, const QString &key)
 {
     // 示例: 从加密文件中加载资源
     // 实际应用中,这些加密文件可以嵌入到二进制中或从外部加载
@@ -95,8 +95,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    // 创建加密文件选择器
-    EncryptedQmlFileSelector *selector = new EncryptedQmlFileSelector(&engine, DECRYPTION_KEY, &app);
+    // 创建加密资源选择器
+    EncryptedResourceSelector *selector = new EncryptedResourceSelector(&engine, DECRYPTION_KEY, &app);
 
     // 加载加密的资源
     loadEncryptedResources(selector, DECRYPTION_KEY);

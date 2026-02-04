@@ -1,21 +1,20 @@
-#ifndef ENCRYPTEDQMLFILESELECTOR_H
-#define ENCRYPTEDQMLFILESELECTOR_H
+#ifndef ENCRYPTEDRESOURCESELECTOR_H
+#define ENCRYPTEDRESOURCESELECTOR_H
 
-#include <QQmlFileSelector>
 #include <QQmlEngine>
 #include <QString>
 #include <QHash>
 
 /**
- * @brief 加密QML文件选择器
- * 在QML引擎加载文件时,自动解密加密的资源
+ * @brief 加密资源选择器
+ * 在加载加密资源（QML、JS、图片等）时，从内存中提供解密后的数据
  */
-class EncryptedQmlFileSelector : public QObject
+class EncryptedResourceSelector : public QObject
 {
     Q_OBJECT
     
 public:
-    explicit EncryptedQmlFileSelector(QQmlEngine *engine, const QString &decryptionKey, QObject *parent = nullptr);
+    explicit EncryptedResourceSelector(QQmlEngine *engine, const QString &decryptionKey, QObject *parent = nullptr);
     
     /**
      * @brief 注册加密的资源路径
@@ -37,4 +36,4 @@ private:
     QHash<QString, QByteArray> m_encryptedResources;
 };
 
-#endif // ENCRYPTEDQMLFILESELECTOR_H
+#endif // ENCRYPTEDRESOURCESELECTOR_H

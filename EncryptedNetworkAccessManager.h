@@ -6,7 +6,7 @@
 #include <QString>
 #include <QHash>
 
-class EncryptedQmlFileSelector;
+class EncryptedResourceSelector;
 
 /**
  * @brief 加密资源网络访问管理器
@@ -17,14 +17,14 @@ class EncryptedNetworkAccessManager : public QNetworkAccessManager
     Q_OBJECT
     
 public:
-    explicit EncryptedNetworkAccessManager(EncryptedQmlFileSelector *selector, QObject *parent = nullptr);
+    explicit EncryptedNetworkAccessManager(EncryptedResourceSelector *selector, QObject *parent = nullptr);
     
 protected:
     QNetworkReply *createRequest(Operation op, const QNetworkRequest &request, 
                                  QIODevice *outgoingData = nullptr) override;
     
 private:
-    EncryptedQmlFileSelector *m_selector;
+    EncryptedResourceSelector *m_resourceSelector;
 };
 
 #include <QQmlNetworkAccessManagerFactory>
@@ -36,15 +36,15 @@ private:
 class EncryptedNetworkAccessManagerFactory : public QQmlNetworkAccessManagerFactory
 {
 public:
-    explicit EncryptedNetworkAccessManagerFactory(EncryptedQmlFileSelector *selector)
-        : m_selector(selector) {}
+    explicit EncryptedNetworkAccessManagerFactory(EncryptedResourceSelector *selector)
+        : m_resourceSelector(selector) {}
 
     QNetworkAccessManager *create(QObject *parent) override {
-        return new EncryptedNetworkAccessManager(m_selector, parent);
+        return new EncryptedNetworkAccessManager(m_resourceSelector, parent);
     }
 
 private:
-    EncryptedQmlFileSelector *m_selector;
+    EncryptedResourceSelector *m_resourceSelector;
 };
 
 /**
