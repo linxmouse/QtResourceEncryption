@@ -4,7 +4,7 @@ import QtQuick.Controls
 
 Window {
     width: 640
-    height: 480
+    height: 550
     visible: true
     title: qsTr("加密QML资源演示")
 
@@ -87,6 +87,10 @@ Window {
                 text: "点击上方按钮测试功能"
                 font.pixelSize: 14
                 color: "#bdc3c7"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            MyComponent {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }

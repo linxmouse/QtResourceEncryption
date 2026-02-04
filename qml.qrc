@@ -3,6 +3,7 @@
   <qresource prefix="/encrypted">
     <file>main.qml.enc</file>
     <file>MyComponent.qml.enc</file>
+    <file>qmldir.enc</file>
     <file>CMake-Logo.png.enc</file>
   </qresource>
 </RCC>
