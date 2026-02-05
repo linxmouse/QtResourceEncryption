@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            // LLDB 使用 env 对象来设置环境变量
+            "env": {
+                "PATH": "${env:PATH};D:\\Qt\\6.10.2\\mingw_64\\bin;D:\\Qt\\Tools\\mingw1310_64\\bin"
+            },
+            // 添加初始化命令
+            "initCommands": [
+                "command script import D:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\debugger\\lldbbridge.py"
+            ]
+        }
+    ]
+}
