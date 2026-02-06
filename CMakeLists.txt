@@ -47,7 +47,7 @@ target_link_libraries(resource_encryptor PRIVATE
 )
 
 set_target_properties(EncryptedQmlApp PROPERTIES
-    WIN32_EXECUTABLE TRUE
+    WIN32_EXECUTABLE $<IF:$<CONFIG:Debug>,FALSE,TRUE>
     MACOSX_BUNDLE TRUE
 )
 
