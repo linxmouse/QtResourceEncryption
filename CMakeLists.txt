@@ -12,16 +12,24 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick Network)
 
 # 主应用程序
-add_executable(EncryptedQmlApp
+qt_add_executable(EncryptedQmlApp
     main.cpp
-    ResourceEncryption.h
-    ResourceEncryption.cpp
-    EncryptedResourceSelector.h
-    EncryptedResourceSelector.cpp
-    EncryptedNetworkAccessManager.h
-    EncryptedNetworkAccessManager.cpp
-    ResourceEncryptor.h
-    ResourceEncryptor.cpp
+    ResourceEncryption.h ResourceEncryption.cpp
+    EncryptedResourceSelector.h EncryptedResourceSelector.cpp
+    EncryptedNetworkAccessManager.h EncryptedNetworkAccessManager.cpp
+    ResourceEncryptor.h ResourceEncryptor.cpp
+)
+
+qt_add_qml_module(EncryptedQmlApp
+    URI "AppModule"
+    VERSION 1.0
+    SOURCES
+        # 新增的cpp模块
+        MyNewCppModule.h MyNewCppModule.cpp
+)
+
+# 添加加密资源文件qrc
+target_sources(EncryptedQmlApp PRIVATE
     qml.qrc
 )
 

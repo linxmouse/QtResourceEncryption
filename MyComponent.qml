@@ -1,4 +1,5 @@
 import QtQuick
+import AppModule 1.0
 
 Rectangle {
     id: root
@@ -6,6 +7,10 @@ Rectangle {
     height: 100
     color: "#3498db"
     radius: 10
+
+    MyNewCppModule {
+        id: cppModule
+    }
 
     property string displayText: "这是一个加密的组件"
 
@@ -20,7 +25,8 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            console.log("加密组件被点击");
+            console.log("加密组件被点击, 调用C++函数");
+            cppModule.printHello();
         }
     }
 }

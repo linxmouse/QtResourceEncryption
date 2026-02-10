@@ -10,6 +10,9 @@
 #include "EncryptedNetworkAccessManager.h"
 #include "EncryptedResourceSelector.h"
 
+// 原始资源模式开关
+// #define USE_ENCRYPTED_RESOURCES
+
 // 日志文件
 static QFile logFile;
 
@@ -112,25 +115,31 @@ int main(int argc, char *argv[]) {
   qInstallMessageHandler(messageHandler);
 
   QGuiApplication app(argc, argv);
-
-  // 密钥应该通过更安全的方式存储,这里仅作演示
-  const QString DECRYPTION_KEY = "MySecretKey123!@#";
-
   QQmlApplicationEngine engine;
 
-  // 创建加密资源选择器
+  // --- 开发调试开关 ---
+  // 注释掉顶部的 #define USE_ENCRYPTED_RESOURCES 即可切换到“原始资源模式”
+
+  QUrl url = QUrl(QStringLiteral("encrypted:/main.qml"));
+  const QString DECRYPTION_KEY = "MySecretKey123!@#";
+
+  // 统一创建选择器
   EncryptedResourceSelector *selector =
       new EncryptedResourceSelector(&engine, DECRYPTION_KEY, &app);
 
-  // 加载加密的资源 (全自动扫描模式)
+#ifdef USE_ENCRYPTED_RESOURCES
+  qDebug() << "运行模式: [加密模式]";
   loadEncryptedResources(selector);
+#else
+  qDebug() << "运行模式: [原始资源模式] - 自定义协议自动映射本地文件";
+  // 设置为原始模式，并指向源码根目录
+  selector->setRawMode(true, app.applicationDirPath() + "/../..");
+#endif
 
-  // 使用自定义网络访问管理器
+  // 无论哪种模式，都注册自定义网络管理，这样 QML 里的 encrypted:/// 永远有效
   engine.setNetworkAccessManagerFactory(
       new EncryptedNetworkAccessManagerFactory(selector));
 
-  // 由于自定义协议会被视为网络请求, 加载是异步的。
-  const QUrl url(QStringLiteral("encrypted:/main.qml"));
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreated, &app,
       [url](QObject *obj, const QUrl &objUrl) {
